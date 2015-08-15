@@ -1,0 +1,21 @@
+# Maintainer: ninian <mcfadzean.org.uk ta linux>
+
+pkgname=goa
+pkgver=2.1.1
+pkgrel=2
+pkgdesc="Opens files with any desktop application or executable, chosen from a menu of all possibilities found in standard locations on the system."
+arch=('any')
+url="http://appstogo.mcfadzean.org.uk/linux.html#goa"
+license=('MIT')
+depends=('bash' 'dmenu' 'libnotify')
+optdepends=('gxmessage: for displaying rather than executing' 'sudo: for executing via sudo' 'gksu: for executing via gksudo')
+source=("http://appstogo.mcfadzean.org.uk/dl/$pkgname/$pkgname-$pkgver.tar.gz")
+md5sums=('0ff766bf845bef5a0e1791c7f77cf54d')
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  install -Dm755 $pkgname "$pkgdir/usr/bin/$pkgname"
+  install -Dm644 goa.conf "$pkgdir/usr/share/doc/$pkgname/$pkgname.conf"
+  install -Dm644 LICENSE  "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  msg "Copy sample configuration file /usr/share/doc/$pkgname/$pkgname.conf and customize per user"
+}
